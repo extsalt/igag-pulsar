@@ -27,5 +27,9 @@ func AddPost(c *gin.Context) {
 }
 
 func GetPosts(c *gin.Context) {
-
+	var posts []models.Post
+	config.PulsarConfig.DB.Find(&posts)
+	c.JSON(200, gin.H{
+		"posts": posts,
+	})
 }
