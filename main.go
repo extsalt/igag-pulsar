@@ -4,8 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"igag-apis/config"
-	"igag-apis/models"
+	"pulsar/config"
+	"pulsar/models"
 )
 
 func main() {
