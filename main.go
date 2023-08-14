@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"igag-apis/config"
 	"igag-apis/models"
 )
 
@@ -22,19 +22,21 @@ func main() {
 	r := gin.Default()
 	r.Use(gin.Recovery())
 	r.Use(gin.Logger())
+	config.PulsarConfig = &config.Config{DB: db}
 	r.GET("/", func(ctx *gin.Context) {
 		_, err := ctx.Cookie("igag")
 		if err != nil {
 			ctx.SetCookie("igag", "ok", 3600, "/", "localhost", false, true)
 		}
-		tx := db.Create(&models.User{
+		user := &models.User{
 			Username: "a",
 			Password: "a",
 			Email:    "a@gmail.com",
-		})
-		fmt.Printf("Row eff %d", tx.RowsAffected)
+		}
+		tx := config.PulsarConfig.DB.Create(user)
 		ctx.JSON(200, gin.H{
-			"status": "success",
+			"ID":   user.ID,
+			"rows": tx.RowsAffected,
 		})
 	})
 	err = r.Run()
