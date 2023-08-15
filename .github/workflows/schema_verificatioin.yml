@@ -9,16 +9,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Verify Database Schema
-        uses: yokawasa/action-sqlcheck@v1.4.0
-        with:
-          post-comment: true
-          risk-level: 3
-          verbose: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-          postfixes: |
-            sql
-          directories: |
-            extra/schema
+    - name: Verify Database Schema
+      uses: yokawasa/action-sqlcheck@v1.4.0
+      with:
+        post-comment: true
+        risk-level: 3
+        verbose: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        postfixes: |
+          sql
+        directories: |
+          extra/schema
