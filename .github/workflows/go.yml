@@ -2,7 +2,7 @@ name: Pulsar Build
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
 
