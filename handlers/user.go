@@ -11,6 +11,7 @@ func LoginUser(c *gin.Context) {
 
 }
 
+// RegisterUser with provided credentials
 func RegisterUser(c *gin.Context) {
 	var registerRequest requests.RegisterUserRequest
 	var err error
@@ -30,4 +31,9 @@ func RegisterUser(c *gin.Context) {
 	c.JSON(422, gin.H{
 		"error": err,
 	})
+}
+
+// Logout user
+func Logout(c *gin.Context) {
+	//Logout user
 }

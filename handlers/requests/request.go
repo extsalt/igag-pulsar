@@ -13,3 +13,15 @@ type RegisterUserRequest struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
+
+// A CreateCommentRequest represent payload for creating a comment
+type CreateCommentRequest struct {
+	Body     string `json:"body"`
+	ImageUrl string `json:"imageUrl"`
+}
+
+// A CreateReplyRequest represent payload for creating a reply
+type CreateReplyRequest struct {
+	Body     string `json:"body"`
+	ImageUrl string `json:"imageUrl"`
+}
