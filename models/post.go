@@ -1,13 +1,17 @@
 package models
 
-import "time"
+import "gorm.io/gorm"
 
 type Post struct {
-	ID        uint64
-	Title     string
-	Body      string
-	UserID    uint64
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt time.Time
+	gorm.Model
+	ID            uint64
+	Title         string
+	Body          string
+	Slug          string
+	OriginalImage string
+	SmImage       string
+	MdImage       string
+	LgImage       string
+	UserID        uint64
+	Tags          []Tag `gorm:"many2many:posts_tags"`
 }
