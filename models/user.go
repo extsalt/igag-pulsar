@@ -1,14 +1,15 @@
 package models
 
 import (
-	"time"
+	"gorm.io/gorm"
 )
 
 type User struct {
-	ID        uint64
-	Username  string
-	Password  string
-	Email     string
-	Active    bool
-	CreatedAt time.Time
+	gorm.Model
+	ID       uint64
+	Username string
+	Password string
+	Email    string
+	Active   bool
+	Posts    []Post // User can have many posts
 }
