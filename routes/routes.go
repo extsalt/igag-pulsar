@@ -12,5 +12,7 @@ func RegisterRoutes() *gin.Engine {
 	engine.POST("/users/logout", handlers.Logout)
 	engine.GET("/posts", handlers.GetPosts)
 	engine.POST("/posts", handlers.AddPost)
+	engine.POST("/posts/{postID}/comments", handlers.AddComment)
+	engine.POST("/comments/{commentID}/replies", handlers.AddReply)
 	return engine
 }
