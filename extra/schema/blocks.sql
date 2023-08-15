@@ -1,4 +1,4 @@
-create table users
+create table blocks
 (
     id            bigint auto_increment primary key,
     user_id       bigint,
