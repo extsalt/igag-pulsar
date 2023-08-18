@@ -8,6 +8,8 @@ type Reply struct {
 	CommentID     uint64
 	Body          string
 	OriginalImage string
+	LikeCount     uint64
+	DislikeCount  uint64
 	SmImage       string
 	MdImage       string
 	LgImage       string

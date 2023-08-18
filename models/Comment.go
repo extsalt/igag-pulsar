@@ -7,6 +7,8 @@ type Comment struct {
 	ID            uint64
 	PostID        uint64
 	Body          string
+	LikeCount     uint64
+	DislikeCount  uint64
 	OriginalImage string
 	SmImage       string
 	MdImage       string
