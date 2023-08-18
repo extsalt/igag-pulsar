@@ -7,7 +7,7 @@ import (
 	"pulsar/models"
 )
 
-func AddPost(c *gin.Context) {
+func AddLikeToPost(c *gin.Context) {
 	var postRequest requests.CreatePostRequest
 	if c.BindJSON(&postRequest) != nil {
 		c.JSON(400, gin.H{
@@ -16,10 +16,9 @@ func AddPost(c *gin.Context) {
 		return
 	}
 	post := &models.Post{
-		UserID:        1,
-		Title:         postRequest.Title,
-		Body:          postRequest.Body,
-		OriginalImage: postRequest.ImageUrl,
+		UserID: 1,
+		Title:  postRequest.Title,
+		Body:   postRequest.Body,
 	}
 	config.PulsarConfig.DB.Create(post)
 	c.JSON(201, gin.H{
@@ -27,7 +26,7 @@ func AddPost(c *gin.Context) {
 	})
 }
 
-func GetPosts(c *gin.Context) {
+func AddDislikeToPosts(c *gin.Context) {
 	var posts []models.Post
 	config.PulsarConfig.DB.Find(&posts)
 	c.JSON(200, gin.H{

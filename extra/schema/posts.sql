@@ -5,6 +5,7 @@ create table posts
     title          text,
     body           text,
     like_count     bigint         default 0,
+    dislike_count  bigint         default 0,
     slug           text,
     original_image varchar(800)   default null,
     sm_image       varchar(800)   default null,
