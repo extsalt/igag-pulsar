@@ -2,7 +2,8 @@ create table comments
 (
     id             bigint auto_increment primary key,
     user_id        bigint,
-    post_id        bigint,
+    resource_id    bigint,
+    resource_type  int default 1 comment "1 = Post, 2 = Comment, 3 = Reply",
     body           text,
     like_count     bigint         default 0,
     dislike_count  bigint         default 0,

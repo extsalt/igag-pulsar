@@ -2,6 +2,9 @@ package sanctum
 
 import "time"
 
+type Authenticate interface {
+}
+
 type AccessToken interface {
 }
 
