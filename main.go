@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	dsn := "root@tcp(127.0.0.1:3306)/igag_dev?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:root@tcp(127.0.0.1:3306)/igag_dev?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
@@ -20,7 +20,7 @@ func main() {
 	sqlDB.SetMaxIdleConns(100)
 	config.PulsarConfig = &config.Config{DB: db}
 	engine := routes.RegisterRoutes()
-	err = engine.Run()
+	err = engine.Run("0.0.0.0:8080")
 	if err != nil {
 		return
 	}

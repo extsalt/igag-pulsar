@@ -2,34 +2,27 @@ package handlers
 
 import (
 	"github.com/gin-gonic/gin"
-	"pulsar/config"
-	"pulsar/handlers/requests"
-	"pulsar/models"
+	"pulsar/handlers/responses"
+	"pulsar/repositories"
 )
 
+type LikeQueryBind struct {
+	PostID string `uri:"postID" binding:"required"`
+}
+
 func AddLikeToPost(c *gin.Context) {
-	var postRequest requests.CreatePostRequest
-	if c.BindJSON(&postRequest) != nil {
-		c.JSON(400, gin.H{
-			"message": "Invalid request",
-		})
+	var likeQueryBind LikeQueryBind
+	if err := c.ShouldBindUri(&likeQueryBind); err != nil {
+		c.JSON(404, gin.H{"message": err})
 		return
 	}
-	post := &models.Post{
-		UserID: 1,
-		Title:  postRequest.Title,
-		Body:   postRequest.Body,
+	_, err := repositories.FindPostById(likeQueryBind.PostID)
+	if err != nil {
+		c.JSON(404, *responses.GetNotFoundResponse())
 	}
-	config.PulsarConfig.DB.Create(post)
-	c.JSON(201, gin.H{
-		"message": "Post created",
-	})
+	//check user has already liked the post
 }
 
 func AddDislikeToPosts(c *gin.Context) {
-	var posts []models.Post
-	config.PulsarConfig.DB.Find(&posts)
-	c.JSON(200, gin.H{
-		"posts": posts,
-	})
+
 }
