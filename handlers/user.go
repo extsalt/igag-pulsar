@@ -2,13 +2,14 @@ package handlers
 
 import (
 	"fmt"
-	"github.com/extsalt/gojwt/extsalt/gojwt"
+	"github.com/extsalt/gojwt"
 	"github.com/gin-gonic/gin"
 	"pulsar/config"
 	"pulsar/handlers/requests"
 	"pulsar/models"
 	"pulsar/pkg/googleoauth2"
 	"pulsar/repositories"
+	"time"
 )
 
 func LoginUser(c *gin.Context) {
@@ -72,14 +73,14 @@ func LoginWithGoogle(c *gin.Context) {
 		})
 		return
 	}
-	jwt, err := gojwt.Create(user.Email, "web", "secret")
+	jwt, err := gojwt.Create(user.Username, "web", "secret")
 	if err != nil {
 		c.JSON(422, gin.H{
 			"error": err,
 		})
 		return
 	}
-	c.SetCookie("iam", jwt, 0, "/", "http://localhost", false, true)
+	c.SetCookie("iam", jwt, int(time.Hour*24*400), "/", "localhost", false, true)
 	c.JSON(200, gin.H{
 		"status": "success",
 	})

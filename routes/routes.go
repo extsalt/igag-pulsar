@@ -1,8 +1,11 @@
 package routes
 
 import (
+	bugsnaggin "github.com/bugsnag/bugsnag-go-gin"
+	"github.com/bugsnag/bugsnag-go/v2"
 	"github.com/gin-gonic/gin"
 	"pulsar/handlers"
+	"pulsar/pkg/sanctum"
 )
 
 func CORSMiddleware() gin.HandlerFunc {
@@ -21,7 +24,12 @@ func CORSMiddleware() gin.HandlerFunc {
 
 func RegisterRoutes() *gin.Engine {
 	engine := gin.Default()
+	engine.Use(bugsnaggin.AutoNotify(bugsnag.Configuration{
+		APIKey:          "7b409ddb936f99d820a65cf006adf0a4",
+		ProjectPackages: []string{"main", "github.com/extsalt/igag-pulsar"},
+	}))
 	engine.Use(CORSMiddleware())
+	engine.Use(sanctum.Auth())
 	engine.POST("/users/login", handlers.LoginUser)
 	engine.POST("/users/register", handlers.RegisterUser)
 	engine.POST("/users/logout", handlers.Logout)

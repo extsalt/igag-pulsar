@@ -6,10 +6,11 @@ import (
 
 type User struct {
 	gorm.Model
-	ID       uint64
-	Username string
-	Password string
-	Email    string
-	Active   bool
-	Posts    []Post // User can have many posts
+	ID            uint64
+	Username      string
+	Password      string
+	Email         string
+	Active        bool
+	OauthProvider string
+	Posts         []Post // User can have many posts
 }

@@ -46,8 +46,5 @@ func GetPosts(c *gin.Context) {
 		})
 		return
 	}
-	//if len(posts) == 0 {
-	//	c.JSON(http.StatusOK, gin.H{})
-	//}
 	c.JSON(200, resources.PostsJsonResource(&posts))
 }

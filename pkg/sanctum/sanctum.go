@@ -1,13 +1,34 @@
 package sanctum
 
-import "time"
+import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"net/http"
+)
+
+type Request struct {
+	*gin.Context
+}
 
 type Authenticate interface {
+	AuthUser() any
 }
 
-type AccessToken interface {
+func (r *Request) AuthUser() any {
+	fmt.Println("hello")
+	return nil
 }
 
-type Sanctum interface {
-	CreateToken(string, []string, time.Duration) AccessToken
+func Auth() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		_, err := c.Cookie("iam")
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+				"status":  "error",
+				"message": "unauthorized",
+			})
+			return
+		}
+		c.Next()
+	}
 }
