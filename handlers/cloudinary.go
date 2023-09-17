@@ -18,6 +18,7 @@ func GetSignature(c *gin.Context) {
 		c.JSON(400, gin.H{
 			"message": "Could not generate signature",
 		})
+		return
 	}
 	c.JSON(200, gin.H{
 		"signature": resp,

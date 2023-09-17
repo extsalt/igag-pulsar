@@ -6,7 +6,7 @@ import (
 )
 
 // FindPostById returns post for given postID
-func FindPostById(postID string) (*models.Post, error) {
+func FindPostById(postID uint64) (*models.Post, error) {
 	var post models.Post
 	err := config.PulsarConfig.DB.First(&post, postID).Error
 	if err != nil {

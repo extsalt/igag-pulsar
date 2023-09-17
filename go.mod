@@ -6,7 +6,7 @@ require (
 	github.com/bugsnag/bugsnag-go-gin v1.0.0
 	github.com/bugsnag/bugsnag-go/v2 v2.2.0
 	github.com/cloudinary/cloudinary-go/v2 v2.4.0
-	github.com/extsalt/gojwt v0.0.1-alpha
+	github.com/extsalt/gojwt v0.0.2-alpha
 	github.com/gin-gonic/gin v1.9.1
 	github.com/gosimple/slug v1.13.1
 	golang.org/x/net v0.14.0
