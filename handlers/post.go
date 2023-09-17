@@ -16,12 +16,11 @@ func AddPost(c *gin.Context) {
 	if c.BindJSON(&postRequest) != nil {
 		c.JSON(400, gin.H{
 			"message": "Invalid request",
-			"user":    sanctum.AuthUser.ID,
 		})
 		return
 	}
 	post := &models.Post{
-		UserID:        1,
+		UserID:        sanctum.AuthUser.ID,
 		Title:         postRequest.Title,
 		Body:          postRequest.Body,
 		OriginalImage: postRequest.ImageUrl,
@@ -41,7 +40,7 @@ func AddPost(c *gin.Context) {
 
 func GetPosts(c *gin.Context) {
 	var posts []models.Post
-	err := config.PulsarConfig.DB.Find(&posts).Error
+	err := config.PulsarConfig.DB.Preload("Users").Find(&posts).Error
 	if err != nil {
 		c.JSON(400, gin.H{
 			"message": "Error",
