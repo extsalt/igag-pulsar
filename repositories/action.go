@@ -29,14 +29,6 @@ func AddActionToResource(resourceID uint64, resource models.Resource, userID uin
 }
 
 // RemoveActionFromResource Remove action from resource
-func RemoveActionFromResource(actionId uint64, resourceID uint64, resource models.Resource, userID uint64, action models.Action) (*models.LikeDislike, error) {
-	actionResource := models.LikeDislike{
-		ID:           actionId,
-		UserID:       userID,
-		ResourceID:   resourceID,
-		ResourceType: resource,
-		Action:       action,
-	}
-	err := Repo().Delete(&actionResource).Error
-	return &actionResource, err
+func RemoveActionFromResource(actionId uint64) error {
+	return Repo().Delete(&models.LikeDislike{}, actionId).Error
 }

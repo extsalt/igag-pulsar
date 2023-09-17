@@ -13,8 +13,8 @@ const (
 type Action uint
 
 const (
-	LikeAction Action = iota + 1
-	DislikeAction
+	DislikeAction Action = iota
+	LikeAction
 )
 
 type LikeDislike struct {
