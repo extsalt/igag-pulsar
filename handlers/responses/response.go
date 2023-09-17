@@ -7,3 +7,8 @@ func GetNotFoundResponse() *NotFoundResponse {
 	response["message"] = "Resource does not exists"
 	return &response
 }
+func GetApiError() *NotFoundResponse {
+	var response NotFoundResponse
+	response["message"] = "Resource does not exists"
+	return &response
+}

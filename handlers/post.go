@@ -8,6 +8,7 @@ import (
 	"pulsar/handlers/requests"
 	"pulsar/handlers/resources"
 	"pulsar/models"
+	"pulsar/pkg/sanctum"
 )
 
 func AddPost(c *gin.Context) {
@@ -15,6 +16,7 @@ func AddPost(c *gin.Context) {
 	if c.BindJSON(&postRequest) != nil {
 		c.JSON(400, gin.H{
 			"message": "Invalid request",
+			"user":    sanctum.AuthUser.ID,
 		})
 		return
 	}
@@ -46,8 +48,5 @@ func GetPosts(c *gin.Context) {
 		})
 		return
 	}
-	//if len(posts) == 0 {
-	//	c.JSON(http.StatusOK, gin.H{})
-	//}
 	c.JSON(200, resources.PostsJsonResource(&posts))
 }
