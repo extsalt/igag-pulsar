@@ -20,7 +20,7 @@ func main() {
 	sqlDB.SetMaxIdleConns(100)
 	config.PulsarConfig = &config.Config{DB: db}
 	engine := routes.RegisterRoutes()
-	err = engine.Run("0.0.0.0:8080")
+	err = engine.Run("127.0.0.1:9090")
 	if err != nil {
 		return
 	}

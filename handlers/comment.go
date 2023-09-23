@@ -5,6 +5,8 @@ import (
 	"pulsar/config"
 	"pulsar/handlers/requests"
 	"pulsar/models"
+	"pulsar/pkg/sanctum"
+	"strconv"
 )
 
 type CommentQueryBind struct {
@@ -18,20 +20,35 @@ func AddComment(c *gin.Context) {
 		c.JSON(404, gin.H{"message": err})
 		return
 	}
+	postID, err := strconv.ParseUint(commentQueryBind.ID, 10, 64)
+	if err != nil {
+		c.JSON(422, gin.H{"message": err})
+		return
+	}
 	var createCommentRequest requests.CreateCommentRequest
 	if err := c.ShouldBindJSON(&createCommentRequest); err != nil {
 		c.JSON(422, gin.H{"message": err})
 		return
 	}
+
 	comment := &models.Comment{
-		PostID: 1,
-		Body:   createCommentRequest.Body,
-		UserID: 1,
+		ResourceID:   postID,
+		ResourceType: models.PostResource,
+		Body:         createCommentRequest.Body,
+		UserID:       sanctum.AuthUser.ID,
 	}
-	err := config.PulsarConfig.DB.Create(comment).Error
+	err = config.PulsarConfig.DB.Create(comment).Error
 	if err != nil {
 		c.JSON(400, gin.H{"message": err})
 		return
 	}
 	c.JSON(201, gin.H{})
+}
+
+func AddLikeToComment(c *gin.Context) {
+
+}
+
+func AddDislikeToComment(c *gin.Context) {
+
 }
