@@ -40,7 +40,7 @@ func AddPost(c *gin.Context) {
 
 func GetPosts(c *gin.Context) {
 	var posts []models.Post
-	err := config.PulsarConfig.DB.Preload("Users").Find(&posts).Error
+	err := config.PulsarConfig.DB.Preload("User").Find(&posts).Error
 	if err != nil {
 		c.JSON(400, gin.H{
 			"message": "Error",

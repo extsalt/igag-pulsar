@@ -8,8 +8,8 @@ type Comment struct {
 	ResourceID    uint64
 	ResourceType  Resource
 	Body          string
-	LikeCount     uint64
-	DislikeCount  uint64
+	LikesCount    uint64
+	DislikesCount uint64
 	OriginalImage string
 	SmImage       string
 	MdImage       string

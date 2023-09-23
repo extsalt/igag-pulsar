@@ -13,7 +13,6 @@ type PostResource struct {
 	ID        string       `json:"id"`
 	Title     string       `json:"title"`
 	Slug      string       `json:"slug"`
-	Body      string       `json:"body"`
 	Image     string       `json:"image"`
 	SmImage   string       `json:"smImage"`
 	MdImage   string       `json:"mdImage"`
@@ -32,10 +31,12 @@ func PostsJsonResource(posts *[]models.Post) *[]PostResource {
 			ID:        strconv.FormatUint(post.ID, 10),
 			Title:     post.Title,
 			Slug:      post.Slug,
-			Body:      post.Body,
 			Image:     post.OriginalImage,
 			CreatedAt: post.CreatedAt.String(),
-			User:      UserResource{},
+			User: UserResource{
+				Avatar:   post.User.Avatar,
+				Username: post.User.Username,
+			},
 		})
 	}
 	return &resource

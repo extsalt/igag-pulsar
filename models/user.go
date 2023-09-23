@@ -10,6 +10,7 @@ type User struct {
 	Username      string
 	Password      string
 	Email         string
+	Avatar        string
 	Active        bool
 	OauthProvider string
 	Posts         []Post // User can have many posts

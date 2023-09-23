@@ -8,6 +8,7 @@ type Resource uint
 
 const (
 	PostResource Resource = iota + 1
+	CommentResource
 )
 
 type Action uint
